@@ -4,3 +4,4 @@ music/__pycache__/
 api/__pycache__/
 music/migrations/__pycache__/
 db.sqlite3
+static/
