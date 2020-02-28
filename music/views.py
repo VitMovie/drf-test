@@ -2,9 +2,10 @@
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import status
+from django.shortcuts import get_object_or_404
 
-from .models import Songs
-from .serializers import SongsSerializer
+from .models import Songs, Artist
+from .serializers import SongsSerializer, ArtistSerializer
 
 
 class ListCreateSongsView(generics.ListCreateAPIView):
@@ -16,9 +17,10 @@ class ListCreateSongsView(generics.ListCreateAPIView):
     serializer_class = SongsSerializer
 
     def post(self, request, *args, **kwargs):
+        artist = get_object_or_404(Artist, pk=kwargs["pk"])
         a_song = Songs.objects.create(
             title=request.data["title"],
-            artist=request.data["artist"]
+            artist=artist
         )
         return Response(
             data=SongsSerializer(a_song).data,
@@ -73,3 +75,14 @@ class SongsDetailView(generics.RetrieveUpdateDestroyAPIView):
                 },
                 status=status.HTTP_404_NOT_FOUND
             )
+
+class ArtistListCreateView(generics.ListCreateAPIView):
+    
+    queryset = Artist.objects.all()
+    serializer_class = ArtistSerializer
+
+
+class ArtistDetailView(generics.RetrieveUpdateDestroyAPIView):
+
+    queryset = Artist.objects.all()
+    serializer_class = ArtistSerializer

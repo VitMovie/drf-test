@@ -1,5 +1,4 @@
 Django==2.2.10
 djangorestframework
 gunicorn
-psycopg2
 django-rest-swagger
