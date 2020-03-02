@@ -26,7 +26,7 @@ SECRET_KEY = 'slei8rrubxamys9dr%vf7&^xf=dc=f=9w5ygdpyai!qc^3xo3l'
 DEBUG = True
 
 ALLOWED_HOSTS = [os.environ['WEBSITE_SITE_NAME'] + '.azurewebsites.net', '127.0.0.1'] if 'WEBSITE_SITE_NAME' in os.environ else []
-
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
