@@ -26,6 +26,8 @@ class ListCreateSongsView(generics.ListCreateAPIView):
             data=SongsSerializer(a_song).data,
             status=status.HTTP_201_CREATED
         )
+    
+    #TODO get song by artist_id
 
 
 class SongsDetailView(generics.RetrieveUpdateDestroyAPIView):
