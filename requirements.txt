@@ -3,3 +3,4 @@ djangorestframework
 gunicorn
 django-rest-swagger
 psycopg2
+whitenoise
