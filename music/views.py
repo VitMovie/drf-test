@@ -13,8 +13,11 @@ class ListCreateSongsView(generics.ListCreateAPIView):
     GET songs/
     POST songs/
     """
-    queryset = Songs.objects.all()
     serializer_class = SongsSerializer
+
+    def get_queryset(self):
+        artist = get_object_or_404(Artist, pk=self.kwargs.get("pk"))
+        return Songs.objects.filter(artist=artist)
 
     def post(self, request, *args, **kwargs):
         artist = get_object_or_404(Artist, pk=kwargs["pk"])
@@ -26,8 +29,6 @@ class ListCreateSongsView(generics.ListCreateAPIView):
             data=SongsSerializer(a_song).data,
             status=status.HTTP_201_CREATED
         )
-    
-    #TODO get song by artist_id
 
 
 class SongsDetailView(generics.RetrieveUpdateDestroyAPIView):
